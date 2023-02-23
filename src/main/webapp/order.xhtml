@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <!-- Header -->
+        <div class="navbar navbar-light d-flex justify-content-around bg-primary rounded mt-3">
+            <h:link outcome="mainPage.xhtml" styleClass="link-dark">Home</h:link>
+            <span class="strong">Buy new stock</span>
+        </div>
+
+
+
+        <h:form>
+            <div class="w-25">
+                <label>Count</label>
+                <h:inputText value="#{order.count}" styleClass="form-control"/>
+            </div>
+
+            <div class="w-25">
+                <label>Price</label>
+                <h:inputText styleClass="form-control" value="#{order.price}"/>
+            </div>
+
+            <div class="w-25">
+                <label>Order Direction</label>
+                <h:selectOneMenu styleClass="form-control" value = "#{order.direction}">
+                    <f:selectItem itemValue = "1" itemLabel = "Buy"/>
+                    <f:selectItem itemValue = "2" itemLabel = "Sell"/>
+                </h:selectOneMenu>
+            </div>
+
+            <h:commandButton value="Order" styleClass="btn btn-danger my-5" action="#{orderService.createNewOrder(order.direction, order.count, order.price)}">
+                <f:param name="id" value="#{saveMarket.activeMarket.id}"/>
+            </h:commandButton>
+
+        </h:form>
+    </div>
+</h:body>
+
+
+
+
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+</h:head>
+
+<div class="container">
+    <!-- Header -->
+    <div class="navbar navbar-light d-flex justify-content-around bg-primary rounded mt-3">
+        <h:link outcome="mainPage.xhtml" styleClass="link-dark">Home</h:link>
+        <span class="strong">Editing Market</span>
+    </div>
+
+    <h:form>
+        <ui:repeat value="${stockMarketService.oneMarket}" var="one">
+            <div class="w-25">
+                <label>Ticker Symbol : <span class="font-italic font-weight-bold">${one.tickerSymbol}</span></label>
+                <h:inputText value="#{stockMarket.tickerSymbol}" styleClass="form-control"/>
+            </div>
+
+            <div class="w-25">
+                <label>Name : <span class="font-italic font-weight-bold">${one.name}</span></label>
+                <h:inputText styleClass="form-control" value="#{stockMarket.name}"/>
+            </div>
+
+            <h:commandButton action="#{stockMarketService.editMarket(stockMarket.tickerSymbol, stockMarket.name)}"
+                             value="Edit" styleClass="btn btn-info">
+                <f:param name="id" value="${one.id}"/>
+            </h:commandButton>
+        </ui:repeat>
+    </h:form>
+
+</div>
+</html>
+
